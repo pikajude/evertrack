@@ -21,5 +21,5 @@ group :assets do
   gem 'mustache-js-rails'
 end
 
-gem 'nokogiri'
+gem 'markdevn', path: "../markdevn"
 gem 'debugger'

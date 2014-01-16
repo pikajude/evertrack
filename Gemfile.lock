@@ -1,3 +1,9 @@
+PATH
+  remote: ../markdevn
+  specs:
+    markdevn (0.0.1)
+      nokogiri
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -159,8 +165,8 @@ DEPENDENCIES
   haml-rails
   jquery-rails
   jquery-ui-rails
+  markdevn!
   mustache-js-rails
-  nokogiri
   pg
   rails (= 4.0.2)
   sass-rails (>= 3.2)

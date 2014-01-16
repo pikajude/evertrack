@@ -4,6 +4,18 @@
   %h2.col-md-3 Finished
   %h2.col-md-3 Resolved
 %div(ng-controller="CurrentSprint")
+  .modal.fade#issue-modal
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close(type="button" data-dismiss="modal" aria-hidden="true") ×
+          %h4.modal-title {{currentNote.title}}
+        .modal-body
+          #epiceditor(style="height: 300px")
+        .modal-footer
+          %button.btn.btn-default(type="button" data-dismiss="modal") Close
+          %button#save-btn.btn.btn-primary(type="button") Save changes
+
   .row
     .col-md-12.load-error.alert.alert-warning(style="display: none")
       %span.glyphicon.glyphicon-exclamation-sign

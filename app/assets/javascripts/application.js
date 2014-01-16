@@ -9,4 +9,5 @@
 //= require jquery.ui.all
 //= require mustache
 //= require jquery.mustache
+//= require bootstrap
 //= require_tree .
