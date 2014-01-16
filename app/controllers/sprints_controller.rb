@@ -4,36 +4,10 @@ class SprintsController < ApplicationController
   def current
     require_client
     t = Time.now
-    @tags = cache "tags" do
-      @client.note_store.listTags(@client.token).select do |tag|
-        Tag.statuses.include?(tag.name)
-      end
+    @tags = cache("tags") { Tag.all_tags }
+    @notes = cache(["sprint", t.year, t.wday]) do
+      Note.notes_for_current_sprint
     end
-    @notes = Hash[Tag.statuses.map.with_index do |status, i|
-      n = cache([t.year, t.wday, "tagged", status]) do
-        newer_tags = Tag.statuses[i+1..-1].map{|q| "-tag:#{q}"}.join(" ")
-        @client.note_store.findNotesMetadata(
-          @client.token,
-          Evernote::EDAM::NoteStore::NoteFilter.new(words: "tag:#{status} #{newer_tags}"),
-          0,
-          10,
-          Evernote::EDAM::NoteStore::NotesMetadataResultSpec.new(
-            includeTitle: true,
-            includeTagGuids: true
-          )
-        ).notes.map do |no|
-          n = Note.new(no, status)
-          n.tags = no.tagGuids.map do |tag|
-            cache(["tag", tag]) do
-              @client.note_store.getTag(@client.token, tag)
-            end
-          end
-          n
-        end
-      end
-      [status, n]
-    end]
-    @notes.default = []
 
     respond_with({
       :notes => @notes,
@@ -44,10 +18,13 @@ class SprintsController < ApplicationController
   def view
     require_client
     @note = cache(["notes", params[:guid]]) do
-      @client.note_store.getNote(@client.token, params[:guid], true, false, false, false)
+      Note.find(params[:guid])
     end
-    @note.content = Note.render_note(@note.content)
     respond_with(@note)
+  end
+
+  def update
+    respond_with(Note.update(params))
   end
 
   private

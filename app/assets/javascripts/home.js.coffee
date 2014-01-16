@@ -6,14 +6,11 @@ window.CurrentSprint = ($scope, $sce) ->
   $.ajax({
     dataType: "json",
     url: "/sprints/current",
-    error: (_1, _2, text) ->
-      $(".loading").css({display: "none"})
-      $(".load-error").css({display: "block"})
+    error: -> $(".loading, .load-error").css({display: "none"})
     success: (response) ->
       $scope.notes = response.notes
       for k, ns of $scope.notes
-        for note in ns
-          $scope.noteSet[note.guid] = note
+        $scope.noteSet[note.guid] = note for note in ns
       $scope.isLoading = false
       $scope.$apply()
       $scope.init()
@@ -67,10 +64,21 @@ window.CurrentSprint = ($scope, $sce) ->
   $(document).on "click", "#save-btn", (e) ->
     $scope.editor.save()
     $scope.currentNote.content = $scope.editor.exportFile()
+    $scope.saveCurrentNote()
     $("#issue-modal").modal("hide")
     $(".issue[data-guid=#{$scope.currentNote.guid}]").html(
       $scope.issueContents($scope.currentNote, true).toString()
     )
+
+  $scope.saveCurrentNote = ->
+    $.ajax({
+      dataType: "json",
+      url: "/sprints/update/#{$scope.currentNote.guid}",
+      type: "POST",
+      data: $scope.currentNote
+      success: (a,b,c) -> debugger,
+      error: (a,b,c) -> debugger
+    })
 
   $scope.editNote = (note) ->
     $("#issue-modal").on("shown.bs.modal", (e) ->
