@@ -17,8 +17,19 @@ class SprintsController < ApplicationController
           Evernote::EDAM::NoteStore::NoteFilter.new(words: "tag:#{status} #{newer_tags}"),
           0,
           10,
-          Evernote::EDAM::NoteStore::NotesMetadataResultSpec.new(includeTitle: true)
-        ).notes.map{|no|Note.new(no, status)}
+          Evernote::EDAM::NoteStore::NotesMetadataResultSpec.new(
+            includeTitle: true,
+            includeTagGuids: true
+          )
+        ).notes.map do |no|
+          n = Note.new(no, status)
+          n.tags = no.tagGuids.map do |tag|
+            cache(["tag", tag]) do
+              @client.note_store.getTag(@client.token, tag)
+            end
+          end
+          n
+        end
       end
       [status, n]
     end]

@@ -117,10 +117,15 @@ window.CurrentSprint = ($scope, $sce) ->
       <a class=issue-title href=#>{{note.title}}</a>
       <img class="issue-loading" src=/assets/loading.gif>
       {{#expanded}}
-        <button type=button class="btn btn-default btn-xs pull-right edit-button">
+        <button type=button class="btn btn-default btn-xs edit-button pull-right">
           <span class="glyphicon glyphicon-cog"></span>
           Edit
         </button>
+      {{/expanded}}
+      {{^expanded}}
+        {{#note.assigned_to}}
+          <img class="pull-right assignee" src="http://www.gravatar.com/avatar/{{note.assigned_to.hash}}?s=26" alt="{{note.assigned_to.email}}">
+        {{/note.assigned_to}}
       {{/expanded}}
     </h3>
     {{#expanded}}
