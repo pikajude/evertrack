@@ -1,0 +1,19 @@
+.row
+  %h2.col-md-3 New
+  %h2.col-md-3 Started
+  %h2.col-md-3 Finished
+  %h2.col-md-3 Resolved
+%div(ng-controller="CurrentSprint")
+  .row
+    .col-md-12.load-error.alert.alert-warning(style="display: none")
+      %span.glyphicon.glyphicon-exclamation-sign
+      Uh-oh! Something went wrong.
+      #{link_to "Refresh the page", "javascript:location.reload(true)"}?
+    .col-md-12.loading(style="{{loadStatus()}}")
+      = image_tag "loading.gif"
+      Loading latest data...
+    - %w[new started completed accepted].each do |sym|
+      .col-md-3.status-column(data-status=sym)
+        .issue(ng-repeat="note in notes.#{sym}"
+               data-guid="{{note.guid}}"
+               ng-bind-html="issueContents(note)")

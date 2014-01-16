@@ -1,0 +1,13 @@
+- notes.each do |no|
+  .issue
+    %h3
+      = no.title
+      - case no.status
+      - when "new"
+        %span.label.label-default new
+      - when "started"
+        %span.label.label-warning started
+      - when "completed"
+        %span.label.label-info completed
+      - when "accepted"
+        %span.label.label-success accepted

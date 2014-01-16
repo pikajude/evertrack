@@ -1,0 +1,32 @@
+.loading, .load-error {
+  padding: 30px 0;
+  text-align: center;
+}
+
+.status-column {
+  min-height: 50px;
+
+  .status-placeholder {
+    height: 34px;
+    border: 3px dashed #ddd;
+    border-radius: 3px;
+    margin: 10px 0;
+    background: #eee;
+  }
+}
+
+.issue {
+  border: 1px solid #eee;
+  background: white;
+  padding: 10px;
+  overflow: hidden;
+  margin-bottom: -1px;
+
+  h3 {
+    margin: 0;
+
+    .issue-loading {
+      visibility: hidden;
+    }
+  }
+}
