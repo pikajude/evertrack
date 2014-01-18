@@ -175,10 +175,10 @@ window.CurrentSprint = ($scope, $sce) ->
     <div class="issue-header">
       <h3>
         {{#note.assigned_to}}
-          <img class="pull-right assignee" src="http://www.gravatar.com/avatar/{{note.assigned_to.hash}}?s=26" alt="{{note.assigned_to.email}}">
+          <img class="pull-right assignee" width=26 height=26 src="http://www.gravatar.com/avatar/{{note.assigned_to.hash}}?s=52" alt="{{note.assigned_to.email}}">
         {{/note.assigned_to}}
         <a class=issue-title href=#>{{note.title}}</a>
-        <img class="issue-loading" src=/assets/loading.gif>
+        <img class="issue-loading" src="/assets/loading.gif" width=16 height=16>
       </h3>
       {{#expanded}}
         <div class="button-bar">

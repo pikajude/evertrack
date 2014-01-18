@@ -30,7 +30,7 @@
       Uh-oh! Something went wrong.
       #{link_to "Refresh the page", "javascript:location.reload(true)"}?
     .col-md-12.loading(style="{{loadStatus()}}")
-      = image_tag "loading.gif"
+      = image_tag "loading.gif", size: "16x16"
       Loading latest data...
     - %w[new started completed accepted].each do |sym|
       .col-md-3.status-column(data-status=sym)
