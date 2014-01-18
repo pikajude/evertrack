@@ -5,6 +5,7 @@
 
 .status-column {
   min-height: 50px;
+  padding: 0 1px;
 
   .status-placeholder {
     height: 34px;
@@ -15,15 +16,41 @@
   }
 }
 
+.type-headers {
+  h3 {
+    font-weight: normal;
+
+    span {
+      font-weight: bold;
+    }
+  }
+}
+
 .issue {
-  border: 1px solid #eee;
   background: white;
-  padding: 10px;
-  overflow: hidden;
   margin-bottom: -1px;
+  position: relative;
+  border: 1px solid #ddd;
+  padding: 10px;
+  padding-left: 13px;
+
+  .button-bar {
+    margin-top: 8px;
+  }
+
+  hr {
+    margin: 10px 0 0;
+  }
+
+  .issue-refreshing {
+    position: absolute;
+    display: none;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: rgba(255,255,255,0.3) url(/assets/loading.gif) no-repeat center center;
+  }
 
   .note-content {
-    padding-top: 15px;
+    padding-top: 10px;
 
     p:last-child {
       margin-bottom: 0;
@@ -44,5 +71,17 @@
 
   textarea#epicedit-text {
     display: none;
+  }
+
+  .issue-bar {
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    bottom: -1px;
+    width: 4px;
+  }
+
+  .issue-bar-feature {
+    background: #6c3;
   }
 }

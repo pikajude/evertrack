@@ -1,9 +1,17 @@
-.row
-  %h2.col-md-3 New
-  %h2.col-md-3 Started
-  %h2.col-md-3 Finished
-  %h2.col-md-3 Resolved
 %div(ng-controller="CurrentSprint")
+  .row.type-headers
+    %h3.col-md-3
+      %span.count {{notes.new.length}}
+      New
+    %h3.col-md-3
+      %span.count {{notes.started.length}}
+      Started
+    %h3.col-md-3
+      %span.count {{notes.completed.length}}
+      Finished
+    %h3.col-md-3
+      %span.count {{notes.accepted.length}}
+      Resolved
   .modal.fade#issue-modal
     .modal-dialog
       .modal-content
